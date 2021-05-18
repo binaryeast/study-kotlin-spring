@@ -1,7 +1,7 @@
 # Kotlin 강좌
 
 ## 이번 주 공부! 
-    코틀린 강좌 1~6강 공부하기
+    코틀린 강좌 7~12강 공부하기
 ***
 ## 1주차 - 1~6강 수강 및 내용 정리
 ### 1강. 코틀린의 시작
@@ -46,7 +46,7 @@ println("구문끝 세미콜론 없어도 가능!")
 * 클래스 : Property (속성)
 * 이 외의 위치 : Local Variable (로컬변수)
 
-코틀린은 변수 선언 후 반드시 초기화 해주어야 함. (기본값, null이 존재x)
+코틀린은 변수 선언 후 반드시 초기화 해주어야 함. (기본변수는 기본값, null 허용X)
 ```Kotlin
 var a: Int = 123
 var a: Int? = null	//자료형 뒤 ?를 붙이면 null을 허용하는 nullable 변수 선언가능
@@ -91,7 +91,7 @@ var a: Int? = null	//자료형 뒤 ?를 붙이면 null을 허용하는 nullable 
     한 줄 "로 감싸기 
     여러줄 -> """로 감싸기
 
-논리형
+논리형 (boolean형)
 
     ture 또는 false
 ***
@@ -109,7 +109,7 @@ var a: Int? = null	//자료형 뒤 ?를 붙이면 null을 허용하는 nullable 
 ```Kotlin
 var a: Int = 54321
 var b: Long = a.toLong()    //사용예시
-
+//예시는 명시적 형변환
 //암시적 형변환 (자동지정) 지원X
 ```
 
@@ -119,6 +119,8 @@ var intArr =  arrayOf(1,2,3)
 var nullArr = arrayOfNulls<Int>(5)  //<자료형>(칸 수)지정되지 않은 값으로 채워짐
 
 //사용은 intArr[인덱스번호], 0부터 시작
+intArr[2] = 8
+println(intArr[4])
 ```
  
 ***
@@ -131,12 +133,13 @@ var a = 1234 //Int지정을 안해줘도 알아서 정수형 판별.
 함수
 ```Kotlin
 fun add(받아올 파라미터값, ex. a:Int): 반환형 {
-
+//중간에 return이 온다면 함수의 중간이더라도 값을 반환하고 함수 종료.
 }
 
 fun add(a: Int, b:Int) = a + b //단일표현식, 마치 변수처럼 함수를 사용
 //반환형 타입추론 가능하므로 반환형 생략가능!
 ```
+코틀린에서 함수는 파라미터를 넣는다는 점 외엔 **자료형이 결정된 변수**라고 접근하는 것이 편함 -> 이후에 배울 함수형 언어라는 코틀린의 특징 이해쉬움
 ***
 ### 5강. 조건문과 비교연산자
 조건문
@@ -163,17 +166,22 @@ if (조건식) {
 
 //조건식 when
 fun doWhen (a: Any) {   //Any : 어떤 자료형이든 호환하는 코틀린 최상위 자료형
+
     when(a) {
         1 -> println("정수 1입니다")
     }
+
 }
 
-//표현식 when
+//표현식(동작대신 값을 반환) when 
 fun doWhen (a: Any) {  
+
     var result = when(a) {
         1 -> "정수 1입니다"
+        is Long -> "Long 타입입니다"
     }
     pritnln (result)    //값 출력
+
 }
 
 ```
@@ -209,7 +217,7 @@ fun doWhen (a: Any) {
 
 /* 조건을 쓸 때..
  증가 : 0..9
- 감소 : 9 downTo 0
+ 감소 : in 9 downTo 0
 
 또한 step을 생략할 시, 자동으로 1씩 증가
 */
